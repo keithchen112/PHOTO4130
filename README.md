@@ -1,2 +1,2 @@
 # PHOTO4130
-i swaer to god thisi the last tiem
+COMP4130 Final Project

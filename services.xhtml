@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <!-- View -->
+  <headReplace metal:use-macro="/templates/header.xhtml/meta_head">
+  </headReplace>
+
+  <body>
+
+    <navReplace metal:use-macro="./templates/nav.xhtml/nav_bar">
+    </navReplace>
+      
+    <div class='container'>
+        <bodyReplace metal:use-macro="./templates/services_body.xhtml/services_main">
+        </bodyReplace>  
+
+        <bodyReplace metal:use-macro="./templates/services_body.xhtml/services_product1">
+        </bodyReplace>    
+    </div>
+      
+    <footerReplace metal:use-macro="./templates/footer.xhtml/footer_bar">
+    </footerReplace>  
+      
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="./js/main.js"></script>
+      
+  </body>
+</html>

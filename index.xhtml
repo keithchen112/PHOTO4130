@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <!-- View -->
+  <headReplace metal:use-macro="/templates/header.xhtml/meta_head">
+  </headReplace>
+
+  <body>
+
+    <navReplace metal:use-macro="./templates/nav.xhtml/nav_bar">
+    </navReplace>
+
+    <bodyReplace metal:use-macro="./templates/body_header.xhtml/body_header">
+    </bodyReplace>  
+      
+    <bodyReplace metal:use-macro="./templates/body_header.xhtml/body_section">
+    </bodyReplace>
+
+    <footerReplace metal:use-macro="./templates/footer.xhtml/footer_bar">
+    </footerReplace>  
+      
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="./js/main.js"></script>
+      
+  </body>
+</html>
