@@ -54,6 +54,30 @@ class DBConnector {
 
     }
     
+        public function query($sql, $params = array()) {
+        try {
+            if($this->conn != null) {
+                $statement = $this->conn->prepare($sql);
+                $statement->execute($params);
+                $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+                return $rows;
+
+            } else {
+                // connection failed, add that to the messages
+                Messages::addMessage("error",
+                    "DBConnector 'query' failure, PDO Connection was null.");
+            }
+            return array();
+
+        } catch(PDOException $e) {
+
+            Messages::addMessage("error", "DBConnector 'query' failure, "
+                . $e->getMessage());
+
+        }
+
+    }
+    
 }
 
 ?>

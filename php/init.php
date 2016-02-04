@@ -3,7 +3,9 @@
 function loadScripts() {
 
 $scripts = array('connection.php',    
-                 'product.php');
+                 'productManager.php',
+                 'messages.php',
+                 'utils.php');
 
     $subDir = "php";
 

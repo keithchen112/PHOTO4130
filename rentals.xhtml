@@ -13,22 +13,43 @@
     <div class='container'>
         <bodyReplace metal:use-macro="./templates/rentals_body.xhtml/rentals_main">
         </bodyReplace>
-
-        <bodyReplace metal:use-macro="./templates/rentals_body.xhtml/rentals_product1">
-        </bodyReplace>
         
-        <br/>
-        
-        <bodyReplace metal:use-macro="./templates/rentals_body.xhtml/rentals_product2">
-        </bodyReplace>
       
     </div>  
       
-    <footerReplace metal:use-macro="./templates/footer.xhtml/footer_bar">
-    </footerReplace>  
       
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="./js/main.js"></script>
       
   </body>
+    
+    <script>
+    $(document).ready(function() {
+    
+                    //
+            function loadProducts() {
+                $.ajax({
+                    url: "php/productManager.php",
+                    type: "GET",
+                    dataType: 'html',
+                    success: function(returnedData) {
+                        //console.log("cart checkout response: ", returnedData);
+                        $("#productslist").html(returnedData);
+
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log(jqXHR.statusText, textStatus);
+                    }
+                });
+            }
+
+            loadProducts();
+        
+        
+        
+    });
+    
+    
+    
+    </script>
 </html>
