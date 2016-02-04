@@ -37,31 +37,27 @@
                 $desc = $row['description'];
                 $html .= "
                 <div class='container'>
-                        <div class='row'>
-            <div class='four columns'>
-                 <a href='#'><img src='http://placehold.it/250x250' alt='' style='width: 100%;'/></a>
-            </div>
-            <div class='six columns'>
-            <h3>$sku</h3>
-                <p>$desc</p>
-            </div>
-            
-            <div class='two columns'>
-                <div class='row'>
-                    <button class='quantity_button' disabled='true'>$$price</button>
+                    <div class='row'>
+                        <div class='four columns'>
+                            <a href='#'><img src='http://placehold.it/250x250' alt='' style='width: 100%;'/></a>
+                        </div>
+                        <div class='six columns'>
+                            <h3>$sku</h3>
+                            <p>$desc</p>
+                        </div>
+                        <div class='two columns'>
+                            <div class='row'>
+                                <button class='quantity_button' disabled='true'>$$price</button>
+                            </div>
+                            <div class='row'>
+                                <button data-sku-add='$sku' class='add_button'>ADD</button>
+                            </div>
+                            <div class='row'>
+                                <button class='quantity_button' disabled='true'>1 LEFT</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            
-                <div class='row'>
-                    <button class='add_button'>ADD</button>
-                </div>
-                
-                <div class='row'>
-                    <button class='quantity_button' disabled='true'>1 LEFT</button>
-                </div>
-            </div>
-        </div>
-        </div>
-        </div>
         
         <br/>";
             }
