@@ -31,6 +31,7 @@
             $rows = $pm->listProducts();
 
             $html = "";
+            
             foreach($rows as $row) {
                 $sku = $row['SKU'];
                 $title = $row['title'];
@@ -65,6 +66,7 @@
         
         <br/>";
             }
+            
             echo $html;
             return;
 

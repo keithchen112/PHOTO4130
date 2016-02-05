@@ -16,6 +16,12 @@ class ProductManager {
         return $rows;
     }
 
+    public function listAdminProducts() {
+        $sql = "SELECT SKU, title, item_price, description, qty FROM product";
+        $rows = $this->db->query($sql);
+        return $rows;
+    }
+    
     public function addProducts() {
         $sql = "INSERT INTO product (SKU, title, item_price, description, qty)
             VALUES ('REN69', 'this is something', '500.00', 'cool','1')";

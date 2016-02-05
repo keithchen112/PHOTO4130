@@ -12,13 +12,14 @@
   
    
     <section class="divider_01" >
+
     <div class="container">
         <div class="row">
             <div class="twelve columns">
                 <h2>ADMIN DASHBOARD</h2>
             </div>
         </div>
-        
+
         <div class="row">
             <div class="menu_simple">
                 <ul>
@@ -26,39 +27,35 @@
                 </ul>
                 <br/>
             </div>
-            <table class="menu_simple">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 15%">SKU</th>
+                        <th style="width: 60%">Product Name</th> 
+                        <th style="width: 20%">Quantity</th>
+                        <th style="width: 10%">Price</th> 
+                    </tr>
+                </thead>
+                <tbody id="productlist">
                 
-                <tr>
-                    <th style="width: 15%">SKU</th>
-                    <th style="width: 60%">Product Name</th> 
-                    <th style="width: 20%">Quantity</th>
-                    <th style="width: 10%">Price</th> 
-                </tr>
                 
+                </tbody>
                 <!-- ADMIN DASHBOARD DROPDOWN PRODUCT MANAGER -->
-                
-
-              <tr>
-    <td>12345</td>
-    <td>1 Day Camera Rental </td>
-    <td style="text-align=">4</td>
-    <td>$100.00</td>
-</tr>
-                <tr>
-    <td><button class="add_button">ADD</button></td>
-    <td>
-<input value="dood"/>
-    </td>
-    <td style="text-align=">
-        <select>
-            <option value="">1</option>
-            <option value="">2</option>
-            <option value="">3</option>
-            <option value="">4</option>
-        </select>
-    </td>
-    <td>$100.00</td>
-</tr>
+                <tfoot>
+                    <tr>
+                        <td><input placeholder="SKU"/></td>
+                        <td><input placeholder="Product Name"/></td>
+                        <td style="text-align=">
+                            <select>
+                                <option value="">1</option>
+                                <option value="">2</option>
+                                <option value="">3</option>
+                                <option value="">4</option>
+                            </select>
+                        </td>
+                        <td><input placeholder="Price"/></td>
+                    </tr>
+               </tfoot>
             </table>
           
             <div class="row">
@@ -87,21 +84,36 @@
 
     <footerReplace metal:use-macro="./templates/footer.xhtml/footer_bar">
     </footerReplace>  
-      
+          
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="./js/main.js"></script>
-      
-      
-    <script>
+      <script src="./js/main.js"></script>
+
+      <script>
       $(document).ready(function() {
-    
-                    
-        
-        
-        
+          
+                function adminloadProducts() {
+                $.ajax({
+                    url: "php/productManager.php",
+                    type: "GET",
+                    dataType: 'html',
+                    success: function(returnedData) {
+                        //console.log("cart checkout response: ", returnedData);
+                        document.getElementById("productlist").innerHTML = returnedData;
+
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log(jqXHR.statusText, textStatus);
+                    }
+                });
+            }
+
+            adminloadProducts();
+         
     });
+      </script> 
       
-      
-      </script>  
+     
   </body>
+    
+    
 </html>
