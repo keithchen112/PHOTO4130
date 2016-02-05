@@ -39,7 +39,7 @@
                 $desc = $row['description'];
                 $qty = $row['qty'];
                 $html .= "
-                <div class='container'>
+                <div class ='container'>
                     <div class='row'>
                         <div class='four columns'>
                             <a href='#'><img src='http://placehold.it/250x250' alt='' style='width: 100%;'/></a>
@@ -62,8 +62,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-        
+        </div>
         <br/>";
             }
             

@@ -23,7 +23,8 @@
         <div class="row">
             <div class="menu_simple">
                 <ul>
-                    <li><a href="" id=""></a></li>
+                    <li><a href="" id="">SERVICES</a></li>
+                    <li><a href="" id="">RENTALS</a></li>
                 </ul>
                 <br/>
             </div>
@@ -93,12 +94,12 @@
           
                 function adminloadProducts() {
                 $.ajax({
-                    url: "php/productManager.php",
+                    url: "admin_get_products.php",
                     type: "GET",
                     dataType: 'html',
                     success: function(returnedData) {
                         //console.log("cart checkout response: ", returnedData);
-                        document.getElementById("productlist").innerHTML = returnedData;
+                        $("#productlist").html(returnedData);
 
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
