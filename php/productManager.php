@@ -1,7 +1,5 @@
 <?php 
 
-require_once('connection.php');
-
 class ProductManager {
 
     private $db;
@@ -22,13 +20,13 @@ class ProductManager {
         return $rows;
     }
     
-    public function addProducts() {
-        $sql = "INSERT INTO product (SKU, title, item_price, description, qty)
-            VALUES ('REN69', 'this is something', '500.00', 'cool','1')";
+    public function addAdminProduct($SKU, $title, $item_price, $qty) {
+        $sql = "INSERT INTO product (SKU, title, item_price, qty)
+            VALUES ('$SKU', '$title', '$item_price', '$qty')";
         $affectedRows = $this->db->affectRows($sql);
         return $affectedRows;
     }
-
+    
     public function findProduct($SKU) {
         $params = array(":sku" => $SKU);
         $sql = "SELECT SKU, item_price, description FROM product WHERE SKU = :sku";

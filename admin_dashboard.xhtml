@@ -44,18 +44,13 @@
                 <!-- ADMIN DASHBOARD DROPDOWN PRODUCT MANAGER -->
                 <tfoot>
                     <tr>
-                        <td><input placeholder="SKU"/></td>
-                        <td><input placeholder="Product Name"/></td>
-                        <td style="text-align=">
-                            <select>
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3</option>
-                                <option value="">4</option>
-                            </select>
-                        </td>
-                        <td><input placeholder="Price"/></td>
+                        <td><input id="admin_product_sku" placeholder="SKU"/></td>
+                        <td><input id="admin_product_name" placeholder="Product Name"/></td>
+                        <td><input id="admin_product_qty" placeholder="Quantity"/></td>
+                        <td><input id="admin_product_price" placeholder="Price"/></td>
+                        <td><button id="add_admin_product" class='add_button'>ADD</button></td>
                     </tr>
+                    
                </tfoot>
             </table>
           
@@ -94,7 +89,7 @@
           
                 function adminloadProducts() {
                 $.ajax({
-                    url: "admin_get_products.php",
+                    url: "admin_products.php",
                     type: "GET",
                     dataType: 'html',
                     success: function(returnedData) {
@@ -110,6 +105,36 @@
 
             adminloadProducts();
          
+            $("#add_admin_product").click(function() {
+                alert("works!");
+
+                // get values from form
+                var sku = $("#admin_product_sku").val();
+                var title = $("#admin_product_name").val();
+                var qty = $("#admin_product_qty").val();
+                var price = $("#admin_product_price").val();
+
+                //console.log(firstName, lastName, userName);
+
+                $.ajax({
+                    url: "admin_products.php",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: {action: "add", newSKU: sku,
+                        newTitle: title, newQty: qty,
+                        newPrice: price},
+                    success: function(returnedData) {
+                        adminloadProducts();
+                        console.log(returnedData);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        $("#p1").text(jqXHR.statusText);
+                    }
+
+                });
+
+            });
+          
     });
       </script> 
       
