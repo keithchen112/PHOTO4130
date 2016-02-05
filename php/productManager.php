@@ -1,6 +1,7 @@
 <?php 
 
 require_once('connection.php');
+
 class ProductManager {
 
     private $db;
@@ -10,9 +11,16 @@ class ProductManager {
     }
 
     public function listProducts() {
-        $sql = "SELECT SKU, item_price, description FROM product";
+        $sql = "SELECT SKU, title, item_price, description, qty FROM product";
         $rows = $this->db->query($sql);
         return $rows;
+    }
+
+    public function addProducts() {
+        $sql = "INSERT INTO product (SKU, title, item_price, description, qty)
+            VALUES ('REN69', 'this is something', '500.00', 'cool','1')";
+        $affectedRows = $this->db->affectRows($sql);
+        return $affectedRows;
     }
 
     public function findProduct($SKU) {
@@ -26,7 +34,9 @@ class ProductManager {
 
         return null;
     }
-
+    
 }
+
+
 
 ?>

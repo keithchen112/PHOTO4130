@@ -133,6 +133,14 @@ a {
     width: 100%;
 }
 
+.quantity_input {
+    background-color: transparent;
+    
+    text-decoration: none;
+    width: 100%;
+    text-align: center;
+}
+
 #admin_login_box {
     width: 40%;
     height: auto;

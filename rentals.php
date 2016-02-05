@@ -33,8 +33,10 @@
             $html = "";
             foreach($rows as $row) {
                 $sku = $row['SKU'];
+                $title = $row['title'];
                 $price = $row['item_price'];
                 $desc = $row['description'];
+                $qty = $row['qty'];
                 $html .= "
                 <div class='container'>
                     <div class='row'>
@@ -42,18 +44,20 @@
                             <a href='#'><img src='http://placehold.it/250x250' alt='' style='width: 100%;'/></a>
                         </div>
                         <div class='six columns'>
-                            <h3>$sku</h3>
-                            <p>$desc</p>
+                            <h3 data-sku-title='$sku'>$title</h3>
+                            <p data-sku-desc='$sku'>$desc</p>
                         </div>
                         <div class='two columns'>
                             <div class='row'>
-                                <button class='quantity_button' disabled='true'>$$price</button>
+                                <button data-sku-price='$sku' class='quantity_button'>$$price</button>
+                                
                             </div>
                             <div class='row'>
                                 <button data-sku-add='$sku' class='add_button'>ADD</button>
                             </div>
                             <div class='row'>
-                                <button class='quantity_button' disabled='true'>1 LEFT</button>
+
+                                <input data-sku-qty='$sku' class='quantity_input' type='number' value='1' min='1' max='10' step='1'/>
                             </div>
                         </div>
                     </div>

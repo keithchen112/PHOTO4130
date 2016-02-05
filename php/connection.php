@@ -78,6 +78,29 @@ class DBConnector {
 
     }
     
+        public function affectRows($sql) {
+
+        try {
+            if($this->conn != null) {
+
+                $numberOfAffectedRows = $this->conn->exec($sql);
+                return $numberOfAffectedRows;
+
+            } else {
+                // connection failed, add that to the messages
+                Messages::addMessage("error",
+                    "DBConnector 'affectRows' failure, PDO Connection was null.");
+                return 0;
+            }
+            return 0;
+
+        } catch(PDOException $e) {
+
+            Messages::addMessage("error", "DBConnector 'affectRows' failure, "
+                . $e->getMessage());
+        }
+    }
+    
 }
 
 ?>
