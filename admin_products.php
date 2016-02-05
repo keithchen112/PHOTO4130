@@ -20,6 +20,7 @@ require_once('php/init.php');
                   <td class='last_name'><span>$title</span></td>
                   <td class='user_name'><span>$qty</span></td>
                   <td class='user_name'><span>$$price</span></td>
+                   <td><button class='remove_button'>delete</button></td>
                   </tr>";
             }
             

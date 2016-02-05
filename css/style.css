@@ -49,6 +49,11 @@ h2 {
     background-color: #CC675B;
 }
 
+.rentals_active {
+    background-color: #CC675B;
+    color: white;
+}
+
 .divider_01 {
 	margin-top: 9%;
 	width: 100%;

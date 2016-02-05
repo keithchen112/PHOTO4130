@@ -26,7 +26,7 @@ class ProductManager {
         $affectedRows = $this->db->affectRows($sql);
         return $affectedRows;
     }
-    
+    /*
     public function findProduct($SKU) {
         $params = array(":sku" => $SKU);
         $sql = "SELECT SKU, item_price, description FROM product WHERE SKU = :sku";
@@ -37,7 +37,7 @@ class ProductManager {
         }
 
         return null;
-    }
+    }*/
     
 }
 
