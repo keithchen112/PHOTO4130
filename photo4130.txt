@@ -1,0 +1,70 @@
+-- phpMyAdmin SQL Dump
+-- version 4.2.7
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost:3306
+-- Generation Time: Feb 05, 2016 at 07:16 PM
+-- Server version: 5.5.41-log
+-- PHP Version: 7.0.0
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `photo4130`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product`
+--
+
+CREATE TABLE IF NOT EXISTS `product` (
+`ID` int(11) NOT NULL,
+  `SKU` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `item_price` decimal(15,2) NOT NULL,
+  `description` varchar(500) CHARACTER SET utf8 NOT NULL,
+  `qty` int(100) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`ID`, `SKU`, `title`, `item_price`, `description`, `qty`) VALUES
+(1, 'REN001', '1 Day Camera Rental', 50.00, 'This is a camera rental.', 5),
+(4, 'REN002', '3 Day Camera Rental 2', 40.00, 'This is another camera rental', 5),
+(5, 'REN003', '4 day camera rental ', 40.00, '', 2),
+(6, 'REN004', '5 Day Camera Rental', 150.00, '', 1),
+(7, 'REN005', '6 Day Camera Rental ', 500.00, '', 2);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `product`
+--
+ALTER TABLE `product`
+ ADD PRIMARY KEY (`ID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `product`
+--
+ALTER TABLE `product`
+MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
