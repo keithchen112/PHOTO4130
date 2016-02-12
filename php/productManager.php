@@ -26,6 +26,37 @@ class ProductManager {
         $affectedRows = $this->db->affectRows($sql);
         return $affectedRows;
     }
+    
+    public function deleteProduct($login) {
+        $sql = "DELETE FROM product WHERE SKU = '$login'";
+        $affectedRows = $this->db->affectRows($sql);
+        return $affectedRows;
+    }
+    
+    public function updateProductTitle($login, $newTitle) {
+        $sql = "UPDATE product SET title = '$newTitle' WHERE SKU = '$login'";
+        $affectedRows = $this->db->affectRows($sql);
+        return $affectedRows;
+    }
+    
+    public function updateProductQty($login, $newQty) {
+        $sql = "UPDATE product SET qty = '$newQty' WHERE SKU = '$login'";
+        $affectedRows = $this->db->affectRows($sql);
+        return $affectedRows;
+    }
+    /*
+    public function updateProductTitle($login, $newTitle) {
+        $sql = "UPDATE product SET title = '$newTitle' WHERE SKU = '$login'";
+        $affectedRows = $this->db->affectRows($sql);
+        return $affectedRows;
+    }
+    
+    public function updateProductTitle($login, $newTitle) {
+        $sql = "UPDATE product SET title = '$newTitle' WHERE SKU = '$login'";
+        $affectedRows = $this->db->affectRows($sql);
+        return $affectedRows;
+    }
+    */
     /*
     public function findProduct($SKU) {
         $params = array(":sku" => $SKU);

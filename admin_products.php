@@ -16,11 +16,12 @@ require_once('php/init.php');
                 $desc = $row['description'];
                 $qty = $row['qty'];
                 $html .= "<tr>
-                  <td class='first_name'><span>$sku</span></td>
-                  <td class='last_name'><span>$title</span></td>
-                  <td class='user_name'><span>$qty</span></td>
-                  <td class='user_name'><span>$$price</span></td>
-                   <td><button class='remove_button'>delete</button></td>
+                  <td class='sku'><span>$sku</span></td>
+                  <td class='title'><span>$title</span></td>
+                  <td class='qty'><span>$qty</span></td>
+                  <td class='price'><span>$$price</span></td>
+                  <td><input id='d-$sku' class='delete' type='button' value='Delete'/></td>
+                  <td><input id='u-$sku' class='update' type='button' value='Update'/></td>
                   </tr>";
             }
             
@@ -32,9 +33,50 @@ require_once('php/init.php');
         $parameters = new Parameters("POST");
 
         $action = $parameters->getValue('action');
+        $sku = $parameters->getValue('SKU');
+            
+        if($action == 'delete' && !empty($sku)) {
 
-        //$data = array("action" => $action, "user_name" => $user_name);
-        if($action == 'add') {
+            $um = new ProductManager();
+            $um->deleteProduct($sku);
+            $data = array("status" => "success", "msg" => "User '$sku' deleted.");
+            echo json_encode($data, JSON_FORCE_OBJECT);
+            return;
+
+        } else if($action == 'update' && !empty($sku)) {
+            $newTitle = $parameters->getValue('newTitle');
+
+            if(!empty($newTitle)) {
+
+                $um = new productManager();
+                $count = $um->updateProductTitle($sku, $newTitle);
+                if($count > 0) {
+                    $data = array("status" => "success", "msg" =>
+                        "User '$sku' updated with new first name ('$newTitle').");
+                } else {
+                    $data = array("status" => "fail", "msg" =>
+                        "User '$sku' was NOT updated with new first name ('$newTitle').");
+                }
+            }else if (!empty($newQty)) {
+
+                $um = new productManager();
+                $count = $um->updateProductQty($sku, $newQty);
+                if($count > 0) {
+                    $data = array("status" => "success", "msg" =>
+                        "User '$sku' updated with new first name ('$newQty').");
+                } else {
+                    $data = array("status" => "fail", "msg" =>
+                        "User '$sku' was NOT updated with new first name ('$newQty').");
+                }
+            } else {
+                $data = array("status" => "fail", "msg" =>
+                    "New user name must be present - value was '$newTitle' for '$sku'.");
+
+            }
+            echo json_encode($data, JSON_FORCE_OBJECT);
+            return;
+
+        } else if($action == 'add') { //$data = array("action" => $action, "user_name" => $user_name);
             $newSKU = $parameters->getValue('newSKU');
             $newTitle = $parameters->getValue('newTitle');
             $newPrice = $parameters->getValue('newPrice');

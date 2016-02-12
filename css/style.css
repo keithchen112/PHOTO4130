@@ -56,7 +56,9 @@ h2 {
 
 .divider_01 {
 	margin-top: 9%;
-	width: 100%;
+    margin-right: 10%;
+    margin-left: 10%;
+	width: 80%;
 	background-color: transparent;
 	height: 100%;
 }
