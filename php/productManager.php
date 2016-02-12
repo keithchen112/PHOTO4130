@@ -44,6 +44,12 @@ class ProductManager {
         $affectedRows = $this->db->affectRows($sql);
         return $affectedRows;
     }
+    
+    public function updateProductPrice($login, $newPrice) {
+        $sql = "UPDATE product SET item_price = '$newPrice' WHERE SKU = '$login'";
+        $affectedRows = $this->db->affectRows($sql);
+        return $affectedRows;
+    }
     /*
     public function updateProductTitle($login, $newTitle) {
         $sql = "UPDATE product SET title = '$newTitle' WHERE SKU = '$login'";

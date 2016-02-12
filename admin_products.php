@@ -39,39 +39,31 @@ require_once('php/init.php');
 
             $um = new ProductManager();
             $um->deleteProduct($sku);
-            $data = array("status" => "success", "msg" => "User '$sku' deleted.");
+            $data = array("status" => "success", "msg" => "Product '$sku' deleted.");
             echo json_encode($data, JSON_FORCE_OBJECT);
             return;
 
         } else if($action == 'update' && !empty($sku)) {
             $newTitle = $parameters->getValue('newTitle');
+            $newQty = $parameters->getValue('newQty');
+            $newPrice = $parameters->getValue('newPrice');
 
             if(!empty($newTitle)) {
 
                 $um = new productManager();
                 $count = $um->updateProductTitle($sku, $newTitle);
-                if($count > 0) {
-                    $data = array("status" => "success", "msg" =>
-                        "User '$sku' updated with new first name ('$newTitle').");
-                } else {
-                    $data = array("status" => "fail", "msg" =>
-                        "User '$sku' was NOT updated with new first name ('$newTitle').");
-                }
-            }else if (!empty($newQty)) {
-
-                $um = new productManager();
                 $count = $um->updateProductQty($sku, $newQty);
+                $count = $um->updateProductPrice($sku, $newPrice);
                 if($count > 0) {
                     $data = array("status" => "success", "msg" =>
-                        "User '$sku' updated with new first name ('$newQty').");
+                        "Product '$sku' been updated to ('$newTitle','$newQty').");
                 } else {
                     $data = array("status" => "fail", "msg" =>
-                        "User '$sku' was NOT updated with new first name ('$newQty').");
+                        "Product '$sku' was NOT updated ('$newTitle').");
                 }
             } else {
                 $data = array("status" => "fail", "msg" =>
                     "New user name must be present - value was '$newTitle' for '$sku'.");
-
             }
             echo json_encode($data, JSON_FORCE_OBJECT);
             return;
