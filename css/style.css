@@ -63,13 +63,21 @@ h2 {
 	height: 100%;
 }
 
+.divider_02 {
+	margin-top: 9%;
+    margin-right: 10%;
+	width: 80%;
+	background-color: transparent;
+	height: 100%;
+}
+
 .footer_bar {
     width: 100%;
     height: 40px;
     background-color: #f3e8d9;
     bottom: 0;
     position: fixed;
-        border-width: 0px 0px 0px 0px;
+    border-width: 0px 0px 0px 0px;
     border-style: solid;
     border-color: #2f2f2f;
 }
