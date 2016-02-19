@@ -78,7 +78,8 @@ class DBConnector {
 
     }
     
-        public function affectRows($sql) {
+    
+    public function affectRows($sql) {
 
         try {
             if($this->conn != null) {
@@ -101,6 +102,32 @@ class DBConnector {
         }
     }
     
+    
+    public function getTransactionID($sql) {
+        try {
+            if($this->conn != null) {
+
+                $this->conn->beginTransaction();
+                 $this->conn->exec($sql);
+                // the id of the last inserted row into a table
+                $lastID = $this->conn->lastInsertId();
+                $this->conn->commit();
+                return $lastID;
+
+            } else {
+                // connection failed, add that to the messages
+                Messages::addMessage("error",
+                    "DBConnector 'getTransactionID' failure, PDO Connection was null.");
+                return -1;
+            }
+            return -1;
+
+        } catch(PDOException $e) {
+            $this->conn->rollBack();
+            Messages::addMessage("error", "DBConnector 'getTransactionID' failure, "
+                . $e->getMessage());
+        }
+    }
 }
 
 ?>

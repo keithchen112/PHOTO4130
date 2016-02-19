@@ -19,7 +19,7 @@ require_once('php/init.php');
                   <td class='sku'><span>$sku</span></td>
                   <td class='title'><span>$title</span></td>
                   <td class='qty'><span>$qty</span></td>
-                  <td class='price'><span>$$price</span></td>
+                  <td class='price'>$<span>$price</span></td>
                   <td><input id='d-$sku' class='delete' type='button' value='Delete'/></td>
                   <td><input id='u-$sku' class='update' type='button' value='Update'/></td>
                   </tr>";
@@ -51,10 +51,17 @@ require_once('php/init.php');
             if(!empty($newTitle)) {
 
                 $um = new productManager();
-                $count = $um->updateProductTitle($sku, $newTitle);
-                $count = $um->updateProductQty($sku, $newQty);
-                $count = $um->updateProductPrice($sku, $newPrice);
-                if($count > 0) {
+                $countTitle = $um->updateProductTitle($sku, $newTitle);
+                $countQty = $um->updateProductQty($sku, $newQty);
+                $countPrice = $um->updateProductPrice($sku, $newPrice);
+                
+                if($countTitle > 0) {
+                    $data = array("status" => "success", "msg" =>
+                        "Product '$sku' been updated to ('$newTitle','$newQty').");
+                } else if($countQty > 0) {
+                    $data = array("status" => "success", "msg" =>
+                        "Product '$sku' been updated to ('$newTitle','$newQty').");
+                } else if($countPrice > 0) {
                     $data = array("status" => "success", "msg" =>
                         "Product '$sku' been updated to ('$newTitle','$newQty').");
                 } else {

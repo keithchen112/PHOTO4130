@@ -222,18 +222,26 @@ th:first-child, td:first-child {
 }
 
 .delete {
-background-color: #CC675B!important;
+background-color: #ff817b!important;
 border-radius: 0px!important;
     border:none!important;
     color: #2f2f2f!important;
-
+opacity: 1;
 }
 .delete:hover {
     color: #fff!important;
 }
 
-
-
+.update {
+background-color: #78C0A8!important;
+border-radius: 0px!important;
+    border:none!important;
+    color: #2f2f2f!important;
+opacity: 1;
+}
+.update:hover {
+    color: #fff!important;
+}
 
 button {
   padding-left: 10px;
@@ -244,3 +252,20 @@ button {
   color: #fff;*/
   height: auto;
 }
+
+input {
+border-radius: 0px!important;    
+    
+}
+
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+  border: 1px solid #f3e8d9;
+  outline: 0; }

@@ -14,8 +14,11 @@
     <section class="divider_01" >
     <div class="container">
         <div class="row">
-            <div class="twelve columns">
+            <div class="ten columns">
                 <h2>SHOPPING CART</h2>
+            </div>
+            <div class="two columns">
+                <button id="startCart" class="add_button">START CART</button>
             </div>
         </div>
         
@@ -38,6 +41,7 @@
               
             </table>
 
+        
         </div>
       
       
@@ -58,7 +62,8 @@
             <!-- TOTAL MUST BE CHANGED THROUGH PHP-->
             <td class="total_td">$200.00</td>
           </table>
-      </div>
+      </div> 
+
         
                 <div class="row">
                     <div class="two columns">
@@ -79,6 +84,41 @@
       
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="./js/main.js"></script>
+      <script>
+          $(document).ready(function(){
+              
+            Storage.prototype.setObject = function(key, value) {
+                this.setItem(key, JSON.stringify(value));
+            }
+
+            Storage.prototype.getObject = function(key) {
+                var value = this.getItem(key);
+                return value && JSON.parse(value);
+            }
+         
+            $("#startCart").click(function() {
+                console.log("Start cart.");
+                $.ajax({
+                    url: "./shopping_cart.php",
+                    type: "POST",
+                    dataType: 'json',
+                    data: {action: "startcart"},
+                    success: function(returnedData) {
+                        console.log("cart start response: ", returnedData);
+
+                        // WEB STORAGE - SESSION STORAGE
+                        //var sessionID = returnedData['s_id'];
+                        sessionStorage.setObject('autosave', {items: []});
+
+
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log(jqXHR.statusText, textStatus);
+                    }
+                });
+            });
       
+       });
+      </script>
   </body>
 </html>

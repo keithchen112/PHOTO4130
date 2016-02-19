@@ -6,7 +6,8 @@ $scripts = array('connection.php',
                  'productManager.php',
                  'messages.php',
                  'parameters.php',
-                 'utils.php');
+                 'utils.php',
+                 'cartManager.php');
 
     $subDir = "php";
 
