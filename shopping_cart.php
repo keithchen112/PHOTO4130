@@ -38,7 +38,7 @@ require_once('php/init.php');
                     $data = array("status" => "fail", "msg" => "Cart NOT started.");
                 }
 
-                break;/*
+                break;
             case "cancelcart":
                 // cancel the cart, end session, set cart row to 'cancelled'
 
@@ -47,7 +47,7 @@ require_once('php/init.php');
                     echo json_encode($data, JSON_FORCE_OBJECT);
                     return;
                 }
-                $affectedRows = $scm->cancelCart($_SESSION['id']);
+                $affectedRows = $cm->cancelCart($_SESSION['id']);
 
                 if($affectedRows > 0) {
 
@@ -59,7 +59,7 @@ require_once('php/init.php');
                     $data = array("status" => "fail", "msg" => "Cart NOT cancelled.");
                 }
 
-                break;
+                break;/*
             case "checkoutcart":
                 // check out the cart
 

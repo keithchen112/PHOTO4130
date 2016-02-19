@@ -14,13 +14,13 @@ class cartManager {
         // return id of the cart that was started
         return $id;
     }
-/*
+
     public function cancelCart($id) {
         $sql = "UPDATE cart SET state = 'cancelled' WHERE ID = $id";
         $count = $this->db->affectRows($sql);
         return $count;
     }
-
+/*
     public function checkoutCart($id) {
         $sql = "UPDATE cart SET state = 'checked out' WHERE ID = $id";
         $count = $this->db->affectRows($sql);
