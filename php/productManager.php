@@ -9,7 +9,7 @@ class ProductManager {
     }
 
     public function listProducts() {
-        $sql = "SELECT SKU, title, item_price, description, qty FROM product";
+        $sql = "SELECT SKU, title, item_price, description, qty FROM product WHERE type='rental'";
         $rows = $this->db->query($sql);
         return $rows;
     }
@@ -50,6 +50,8 @@ class ProductManager {
         $affectedRows = $this->db->affectRows($sql);
         return $affectedRows;
     }
+    
+    
     /*
     public function updateProductTitle($login, $newTitle) {
         $sql = "UPDATE product SET title = '$newTitle' WHERE SKU = '$login'";

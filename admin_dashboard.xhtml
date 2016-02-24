@@ -113,7 +113,10 @@
                 var price = $("#admin_product_price").val();
 
                 //console.log(firstName, lastName, userName);
-
+                $("#admin_product_sku").val('');
+                $("#admin_product_name").val('');
+                $("#admin_product_qty").val('');
+                $("#admin_product_price").val('');
                 $.ajax({
                     url: "admin_products.php",
                     type: "POST",
@@ -124,6 +127,7 @@
                     success: function(returnedData) {
                         adminloadProducts();
                         console.log(returnedData);
+                        
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         $("#p1").text(jqXHR.statusText);
