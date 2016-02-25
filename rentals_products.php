@@ -16,6 +16,7 @@ require_once('php/init.php');
                 $desc = $row['description'];
                 $qty = $row['qty'];
                 $html .= "<tr>
+                        <td data-sku-title='$sku'>$title</td>
                         <td data-sku-desc='$sku'>$desc</td>
                         <td><input data-sku-qty='$sku' type='number' value='1' min='1' max='10' step='1'/></td>
                         <td data-sku-price='$sku'>$price</td>
