@@ -9,27 +9,37 @@
 
     <navReplace metal:use-macro="./templates/nav.xhtml/nav_bar">
     </navReplace>
-      
-    <div class='container'>
-    <section class="divider_02">   
-            <div class="row">
-                <div class="twelve columns">
-                    <h2>RENTALS</h2>
-                </div>
-            </div>
-    </section> 
-            <table id="products">
+  
+   
+    <section class="divider_01" >
 
-                <tbody id="productslist">
+        <div class="row">
+
+            <table id="products">
+                <thead>
+                    <tr>
+                        <th style="width: 10%">SKU</th>
+                        <th style="width: 50%">Product Name</th> 
+                        <th style="width: 10%">Quantity</th>
+                        <th style="width: 10%">Price</th>
+                        <th style="width: 10%"></th>
+                        <th style="width: 10%"></th>
+                    </tr>
+                </thead>
+                <tbody id="productlist">
                 
                 
                 </tbody>
+                <!-- ADMIN DASHBOARD DROPDOWN PRODUCT MANAGER -->
 
             </table>
-      
-    </div>  
-      
- 
+
+
+          
+        </div>
+
+    </section>
+
     <footerReplace metal:use-macro="./templates/footer.xhtml/footer_bar">
     </footerReplace> 
       
@@ -37,15 +47,15 @@
     <script src="./js/main.js"></script>
       <script>
     $(document).ready(function() {
-            function loadProducts() {
+                function adminloadProducts() {
                 $.ajax({
-                    url: "php/productManager.php",
+                    url: "admin_products.php",
                     type: "GET",
                     dataType: 'html',
                     success: function(returnedData) {
                         //console.log("cart checkout response: ", returnedData);
-                        $("#productslist").html(returnedData);
-                        
+                        $("#productlist").html(returnedData);
+
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         console.log(jqXHR.statusText, textStatus);
@@ -53,12 +63,12 @@
                 });
             }
 
-            loadProducts();
+            adminloadProducts();
         
             //WORK IN PROGRESS
-            $('#productslist').on('click', 'input[data-sku-add]', function() {
+            $('#productlist').on('click', 'input[data-sku-add]', function() {
                 //console.log(this.getAttribute("data-sku-add"));
-
+/*
                 // get the sku
                 var sku = this.getAttribute("data-sku-add");
                 var qty = $("input[data-sku-qty='" + sku + "']").val();
@@ -89,7 +99,7 @@
                 // clobber the old value
                 sessionStorage.setObject('autosave', cartData);
 
-
+*/
             });
         
     });

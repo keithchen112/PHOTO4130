@@ -9,7 +9,7 @@ class ProductManager {
     }
 
     public function listProducts() {
-        $sql = "SELECT SKU, title, item_price, description, qty FROM product WHERE type='rental'";
+        $sql = "SELECT SKU, title, item_price, description, qty FROM product";
         $rows = $this->db->query($sql);
         return $rows;
     }
