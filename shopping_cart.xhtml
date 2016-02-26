@@ -58,7 +58,7 @@
             <td class="total_td"></td>
               
             <!-- TOTAL MUST BE CHANGED DYANMICALLY-->
-            <td class="total_td">$200.00</td>
+            <td id='total' class="total_td">$200.00</td>
           </table>
       </div> 
 
@@ -110,7 +110,7 @@
                         // WEB STORAGE - SESSION STORAGE
                         //var sessionID = returnedData['s_id'];
                         sessionStorage.setObject('autosave', {items: []});
-                        //$("#startCart").css("display","none");
+                        $("#startCart").css("display","none");
 
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
@@ -132,7 +132,7 @@
 
                         // SESSION STORAGE - CLEAR THE SESSION
                         sessionStorage.clear();
-                        //$("#startCart").css("display","block");
+                        $("#startCart").css("display","block");
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         console.log(jqXHR.statusText, textStatus);
@@ -149,6 +149,8 @@
                 // if nothing added leave function
                 if(cartData == null) {
                     return;
+                } else {
+                    $("#startCart").css("display","none");
                 }
                 var cartDataItems = cartData['items'];
                 var shoppingCartList = $("#shoppingCart");
@@ -163,6 +165,7 @@
                     var price = item['price'];
                     var title = item['title'];
                     var subtotal = parseFloat(Math.round((qty * price) * 100) / 100).toFixed(2);
+                    var total = document.getElementById('total');
 
                     var item = "<tr data-item-sku='" + sku + "' data-item-qty='" + qty + "' data-item-date='"
                         + date + "'>" + title + " " + qty + " x $" + price + " = " + subtotal
