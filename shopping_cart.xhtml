@@ -85,7 +85,7 @@
       <script>
           /*<![CDATA[*/
           $(document).ready(function(){  
-              
+            var getTotal = document.getElementById('total');
               
               
             Storage.prototype.setObject = function(key, value) {
@@ -165,16 +165,19 @@
                     var price = item['price'];
                     var title = item['title'];
                     var subtotal = parseFloat(Math.round((qty * price) * 100) / 100).toFixed(2);
-                    var total = document.getElementById('total');
+                   
 
                     var item = "<tr data-item-sku='" + sku + "' data-item-qty='" + qty + "' data-item-date='"
                         + date + "'>" + title + " " + qty + " x $" + price + " = " + subtotal
                         + "<td><input class='' type='button' data-remove-button='remove' value='X'/></td><td>" + sku + "</td><td>" + title + "</td><td>" + qty + "</td><td>" + '$'+ subtotal + "</td></tr>";
                     shoppingCartList.append(item);
-
+                   for(var i = 0; i < cartDataItems.length; i++) {
+                   }
 
                 }
                 console.log('cart items array, added', cartDataItems);
+                 
+                console.log(grandTotal);
             }
             loadShoppingCartItems();
               
