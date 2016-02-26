@@ -86,9 +86,9 @@
                 var sku = this.getAttribute("data-sku-add");
                 var qty = $("input[data-sku-qty='" + sku + "']").val();
                 var price = $("td[data-sku-price='" + sku + "']").text();
-                var desc = $("td[data-sku-desc='" + sku + "']").text();
+                var title = $("td[data-sku-title='" + sku + "']").text();
                 var subtotal = parseFloat(Math.round((qty * price) * 100) / 100).toFixed(2);
-                console.log(desc, "quantity", qty, "price", price);
+                console.log(title, "quantity", qty, "price", price);
 
                 var shoppingCartList = $("#shoppingCart");
 
@@ -96,7 +96,7 @@
                 // ALTERED FOR WEB STORAGE
                 var aDate = new Date();
                 var item = "<li data-item-sku='" + sku + "' data-item-qty='" + qty + "' data-item-date='"
-                    + aDate.getTime() + "'>" + desc + " " + qty + " x $" + price + " = " + subtotal
+                    + aDate.getTime() + "'>" + title + " " + qty + " x $" + price + " = " + subtotal
                     + " <input type='button' data-remove-button='remove' value='X'/></li>";
                 shoppingCartList.append(item);
 
@@ -107,7 +107,7 @@
                 if(cartData == null) {
                     return;
                 }
-                var item = {'sku': sku, 'qty': qty, date: aDate.getTime(), 'desc': desc, 'price': price};
+                var item = {'sku': sku, 'qty': qty, date: aDate.getTime(), 'title': title, 'price': price};
                 cartData['items'].push(item);
                 // clobber the old value
                 sessionStorage.setObject('autosave', cartData);
@@ -132,11 +132,11 @@
                     var qty = item['qty'];
                     var date = item['date'];
                     var price = item['price'];
-                    var desc = item['desc'];
+                    var title = item['title'];
                     var subtotal = parseFloat(Math.round((qty * price) * 100) / 100).toFixed(2);
 
                     var item = "<li data-item-sku='" + sku + "' data-item-qty='" + qty + "' data-item-date='"
-                        + date + "'>" + desc + " " + qty + " x $" + price + " = " + subtotal
+                        + date + "'>" + title + " " + qty + " x $" + price + " = " + subtotal
                         + " <input type='button' data-remove-button='remove' value='X'/></li>";
                     shoppingCartList.append(item);
 

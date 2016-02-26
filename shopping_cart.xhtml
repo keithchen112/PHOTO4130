@@ -84,7 +84,9 @@
     <script src="./js/main.js"></script>
       <script>
           /*<![CDATA[*/
-          $(document).ready(function(){
+          $(document).ready(function(){  
+              
+              
               
             Storage.prototype.setObject = function(key, value) {
                 this.setItem(key, JSON.stringify(value));
@@ -108,7 +110,7 @@
                         // WEB STORAGE - SESSION STORAGE
                         //var sessionID = returnedData['s_id'];
                         sessionStorage.setObject('autosave', {items: []});
-
+                        //$("#startCart").css("display","none");
 
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
@@ -130,7 +132,7 @@
 
                         // SESSION STORAGE - CLEAR THE SESSION
                         sessionStorage.clear();
-
+                        //$("#startCart").css("display","block");
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         console.log(jqXHR.statusText, textStatus);
@@ -159,12 +161,12 @@
                     var qty = item['qty'];
                     var date = item['date'];
                     var price = item['price'];
-                    var desc = item['desc'];
+                    var title = item['title'];
                     var subtotal = parseFloat(Math.round((qty * price) * 100) / 100).toFixed(2);
 
                     var item = "<tr data-item-sku='" + sku + "' data-item-qty='" + qty + "' data-item-date='"
-                        + date + "'>" + desc + " " + qty + " x $" + price + " = " + subtotal
-                        + "<td><input class='' type='button' data-remove-button='remove' value='X'/></td><td>" + sku + "</td><td>" + desc + "</td><td>" + qty + "</td><td>" + '$'+ subtotal + "</td></tr>";
+                        + date + "'>" + title + " " + qty + " x $" + price + " = " + subtotal
+                        + "<td><input class='' type='button' data-remove-button='remove' value='X'/></td><td>" + sku + "</td><td>" + title + "</td><td>" + qty + "</td><td>" + '$'+ subtotal + "</td></tr>";
                     shoppingCartList.append(item);
 
 
