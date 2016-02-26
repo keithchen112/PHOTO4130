@@ -57,7 +57,7 @@
             <td class="total_td"></td>
             <td class="total_td"></td>
               
-            <!-- TOTAL MUST BE CHANGED THROUGH PHP-->
+            <!-- TOTAL MUST BE CHANGED DYANMICALLY-->
             <td class="total_td">$200.00</td>
           </table>
       </div> 
@@ -164,7 +164,7 @@
 
                     var item = "<tr data-item-sku='" + sku + "' data-item-qty='" + qty + "' data-item-date='"
                         + date + "'>" + desc + " " + qty + " x $" + price + " = " + subtotal
-                        + "<td><input type='button' data-remove-button='remove' value='X'/></td><td>" + sku + "</td><td>" + desc + "</td><td>" + qty + "</td><td>" + price + "</td></tr>";
+                        + "<td><input class='' type='button' data-remove-button='remove' value='X'/></td><td>" + sku + "</td><td>" + desc + "</td><td>" + qty + "</td><td>" + '$'+ subtotal + "</td></tr>";
                     shoppingCartList.append(item);
 
 
@@ -172,6 +172,38 @@
                 console.log('cart items array, added', cartDataItems);
             }
             loadShoppingCartItems();
+              
+              
+            // remove items from the cart
+            $("#shoppingCart").on("click", "input", function() {
+                // https://api.jquery.com/closest/
+                // WEB STORAGE REMOVE
+                var thisInputSKU = this.parentNode.parentNode.getAttribute('data-item-sku');
+                var thisInputQty = this.parentNode.parentNode.getAttribute('data-item-qty');
+                var thisInputDate = this.parentNode.parentNode.getAttribute('data-item-date');
+
+                var cartData = sessionStorage.getObject('autosave');
+                if(cartData == null) {
+                    return;
+                }
+                var cartDataItems = cartData['items'];
+                for(var i = 0; i < cartDataItems.length; i++) {
+                    var item = cartDataItems[i];
+                    // get the item based on the sku, qty, and date
+                    if(item['sku'] == thisInputSKU && item['date'] == thisInputDate) {
+                        // remove from web storage
+                        cartDataItems.splice(i, 1);
+
+                    }
+                }
+                cartData['items'] = cartDataItems;
+                console.log('cart data stuff', cartData);
+                // clobber the old value
+                sessionStorage.setObject('autosave', cartData);
+
+                this.closest("tr").remove();
+
+            });
               
        });
           /*]]>*/
