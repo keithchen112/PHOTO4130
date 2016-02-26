@@ -32,7 +32,9 @@
                 <!-- ADMIN DASHBOARD DROPDOWN PRODUCT MANAGER -->
 
             </table>
-
+<div id="shoppingCart">
+            
+            </div>
         </div>
 
     </section>
@@ -44,10 +46,9 @@
     <script src="./js/main.js"></script>
       <script>
     $(document).ready(function() {
-        
+        //<![CDATA[
             // FOR PUTTING OBJECTS INTO HTML5 WEB STORAGE - ADD METHODS TO THE STORAGE OBJECT
             // http://stackoverflow.com/questions/2010892/storing-objects-in-html5-localstorage
-        /*
             Storage.prototype.setObject = function(key, value) {
                 this.setItem(key, JSON.stringify(value));
             }
@@ -55,7 +56,7 @@
             Storage.prototype.getObject = function(key) {
                 var value = this.getItem(key);
                 return value && JSON.parse(value);
-            }*/
+            }
         
         
             function listRentalProducts() {
@@ -78,9 +79,9 @@
         
             //WORK IN PROGRESS
             $('#productlist').on('click', 'input[data-sku-add]', function() {
-                alert("Weee");
-                //console.log(this.getAttribute("data-sku-add"));
-/*
+                alert("Item added to shopping cart!");
+                console.log(this.getAttribute("data-sku-add"));
+
                 // get the sku
                 var sku = this.getAttribute("data-sku-add");
                 var qty = $("input[data-sku-qty='" + sku + "']").val();
@@ -99,8 +100,8 @@
                     + " <input type='button' data-remove-button='remove' value='X'/></li>";
                 shoppingCartList.append(item);
 
-
-                // SESSION STORAGE - SAVE SKU AND QTY AS AN OBJECT IN THE
+                
+               // SESSION STORAGE - SAVE SKU AND QTY AS AN OBJECT IN THE
                 // ARRAY INSIDE OF THE AUTOSAVE OBJECT
                 var cartData = sessionStorage.getObject('autosave');
                 if(cartData == null) {
@@ -110,11 +111,43 @@
                 cartData['items'].push(item);
                 // clobber the old value
                 sessionStorage.setObject('autosave', cartData);
-
-*/
             });
         
+            function loadShoppingCartItems() {
+
+                var cartData = sessionStorage.getObject('autosave');
+
+                // if nothing added leave function
+                if(cartData == null) {
+                    return;
+                }
+                var cartDataItems = cartData['items'];
+                var shoppingCartList = $("#shoppingCart");
+
+
+                for(var i = 0; i < cartDataItems.length; i++) {
+                    var item = cartDataItems[i];
+                    // sku, qty, date
+                    var sku = item['sku'];
+                    var qty = item['qty'];
+                    var date = item['date'];
+                    var price = item['price'];
+                    var desc = item['desc'];
+                    var subtotal = parseFloat(Math.round((qty * price) * 100) / 100).toFixed(2);
+
+                    var item = "<li data-item-sku='" + sku + "' data-item-qty='" + qty + "' data-item-date='"
+                        + date + "'>" + desc + " " + qty + " x $" + price + " = " + subtotal
+                        + " <input type='button' data-remove-button='remove' value='X'/></li>";
+                    shoppingCartList.append(item);
+
+
+                }
+                console.log('cart items array, added', cartDataItems);
+            }
+            loadShoppingCartItems();
+        
     });
+          //]]>
     </script>
   </body>
     
