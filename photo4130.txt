@@ -47,17 +47,24 @@ CREATE TABLE `product` (
   `title` varchar(100) NOT NULL,
   `item_price` decimal(15,2) NOT NULL,
   `description` varchar(500) CHARACTER SET utf8 NOT NULL,
-  `qty` int(100) NOT NULL
+  `qty` int(100) NOT NULL,
+  `type` varchar(100) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`ID`, `SKU`, `title`, `item_price`, `description`, `qty`) VALUES
-(4, 'REN002', '3 Day Camera Rental', '12.00', 'This is another camera rental', 4),
-(5, 'REN003', '4 day camera rental 2', '14.00', '', 1),
-(6, 'REN004', '5 Day Camera Rental', '150.00', '', 1);
+INSERT INTO `product` (`ID`, `SKU`, `title`, `item_price`, `description`, `qty`,`type`) VALUES
+(4, 'REN002', '3 Day Camera Rental', '12.00', 'This is another camera rental', 4, 'service'),
+(5, 'REN003', '4 day camera rental 2', '13.00', '', 1,'service'),
+(6, 'REN004', '5 Day Camera Rental', '14.00', 'This is another camera rental', 4,'service'),
+(7, 'REN005', 'TamroN 50mm lens F1.8 2', '120.00', '', 1,'rental'),
+(8, 'REN006', 'Cornon 100mm lens f2.6', '1200.00', 'This is another camera rental', 4,'rental'),
+(9, 'REN007', 'Nerkon 200mm sports lens', '1500.00', '', 1,'rental'),
+(10, 'REN008', 'Panaphonics XT1i camera elite edition', '100.00', 'This is another camera rental', 4,'rental'),
+(11, 'REN009', 'purple cat camera', '14.00', '', 1,'rental'),
+(12, 'REN010', 'orange camera', '150.00', '', 1,'rental');
 
 -- --------------------------------------------------------
 
