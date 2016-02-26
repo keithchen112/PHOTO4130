@@ -1,16 +1,14 @@
 <?php
-
-    require_once('php/init.php');
+require_once('php/init.php');
     loadScripts();
 
         $data = array("status" => "not set!");
 
         if(Utils::isGET()) {
             $pm = new ProductManager();
-            $rows = $pm->listProducts();
+            $rows = $pm->listAdminProducts();
 
             $html = "";
-            
             foreach($rows as $row) {
                 $sku = $row['SKU'];
                 $title = $row['title'];
@@ -18,6 +16,7 @@
                 $desc = $row['description'];
                 $qty = $row['qty'];
                 $html .= "<tr>
+                        <td data-sku-title='$sku'>$title</td>
                         <td data-sku-desc='$sku'>$desc</td>
                         <td><input data-sku-qty='$sku' type='number' value='1' min='1' max='10' step='1'/></td>
                         <td data-sku-price='$sku'>$price</td>
@@ -28,11 +27,5 @@
             echo $html;
             return;
 
-        } else {
-            $data = array("status" => "error", "msg" => "Only GET allowed.");
-
         }
-
-        echo json_encode($data, JSON_FORCE_OBJECT);
-
 ?>

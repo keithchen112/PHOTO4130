@@ -25,6 +25,7 @@
         <div class="row">
 
             <table class="menu_simple">
+                <thead>
                 <tr>
                     <th style="width: 10%"></th>
                     <th style="width: 15%">Product ID</th>
@@ -32,12 +33,9 @@
                     <th style="width: 20%">Quantity</th>
                     <th style="width: 10%">Price</th> 
                 </tr>
-              
-                <bodyReplace metal:use-macro="./templates/cart.xhtml/cart_product_1">
-                </bodyReplace>
-              
-                <bodyReplace metal:use-macro="./templates/cart.xhtml/cart_product_1">
-                </bodyReplace>
+                    </thead>
+              <tbody id='shoppingCart'>
+                </tbody>
               
             </table>
 
@@ -70,8 +68,8 @@
                         <button id="cancelCart" class="remove_button">CANCEL</button>
                     </div>
                     
-                    <div class="two columns">-
-                        <button class="add_button">CHECKOUT YOU SLUTS </button>
+                    <div class="two columns">
+                        <button class="add_button">CHECKOUT</button>
                     </div>
                 </div>
         
@@ -85,6 +83,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="./js/main.js"></script>
       <script>
+          /*<![CDATA[*/
           $(document).ready(function(){
               
             Storage.prototype.setObject = function(key, value) {
@@ -140,7 +139,42 @@
                 var shoppingCartList = $("#shoppingCart").html("");
             });  
               
+              
+            function loadShoppingCartItems() {
+
+                var cartData = sessionStorage.getObject('autosave');
+
+                // if nothing added leave function
+                if(cartData == null) {
+                    return;
+                }
+                var cartDataItems = cartData['items'];
+                var shoppingCartList = $("#shoppingCart");
+
+
+                for(var i = 0; i < cartDataItems.length; i++) {
+                    var item = cartDataItems[i];
+                    // sku, qty, date
+                    var sku = item['sku'];
+                    var qty = item['qty'];
+                    var date = item['date'];
+                    var price = item['price'];
+                    var desc = item['desc'];
+                    var subtotal = parseFloat(Math.round((qty * price) * 100) / 100).toFixed(2);
+
+                    var item = "<tr data-item-sku='" + sku + "' data-item-qty='" + qty + "' data-item-date='"
+                        + date + "'>" + desc + " " + qty + " x $" + price + " = " + subtotal
+                        + "<td><input type='button' data-remove-button='remove' value='X'/></td><td>" + sku + "</td><td>" + desc + "</td><td>" + qty + "</td><td>" + price + "</td></tr>";
+                    shoppingCartList.append(item);
+
+
+                }
+                console.log('cart items array, added', cartDataItems);
+            }
+            loadShoppingCartItems();
+              
        });
+          /*]]>*/
       </script>
   </body>
 </html>
