@@ -58,7 +58,7 @@
             <td class="total_td"></td>
               
             <!-- TOTAL MUST BE CHANGED DYANMICALLY-->
-            <td id='total' class="total_td">$200.00</td>
+            <td id='total' class="total_td"></td>
           </table>
       </div> 
 
@@ -69,7 +69,7 @@
                     </div>
                     
                     <div class="two columns">
-                        <button class="add_button">CHECKOUT</button>
+                        <button class="add_button">UPDATE</button>
                     </div>
                 </div>
         
@@ -85,7 +85,7 @@
       <script>
           /*<![CDATA[*/
           $(document).ready(function(){  
-              
+    
               
               
             Storage.prototype.setObject = function(key, value) {
@@ -165,13 +165,26 @@
                     var price = item['price'];
                     var title = item['title'];
                     var subtotal = parseFloat(Math.round((qty * price) * 100) / 100).toFixed(2);
-                    var total = document.getElementById('total');
+                    var grandTotal = parseFloat(Math.round((qty * subtotal) * 100) / 100).toFixed(2);
+                    
 
                     var item = "<tr data-item-sku='" + sku + "' data-item-qty='" + qty + "' data-item-date='"
                         + date + "'>" + title + " " + qty + " x $" + price + " = " + subtotal
                         + "<td><input class='' type='button' data-remove-button='remove' value='X'/></td><td>" + sku + "</td><td>" + title + "</td><td>" + qty + "</td><td>" + '$'+ subtotal + "</td></tr>";
                     shoppingCartList.append(item);
+                    
+                    //grandTotal.innerHTML += subtotal;
+                    
+                    
+                        //$('#total').val.innerHTML += subtotal;
+                    
                 }
+                
+                for(var i = 0; i < cartDataItems.length; i++) {
+                   //console.log(cartdataItems[i]['grandTotal']);
+                    
+                }
+                
                 console.log('cart items array, added', cartDataItems);
             }
             loadShoppingCartItems();
