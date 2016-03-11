@@ -10,8 +10,23 @@
     <navReplace metal:use-macro="./templates/nav.xhtml/nav_bar">
     </navReplace>
   
-    <bodyReplace metal:use-macro="./templates/admin_login.xhtml/admin_login">
-    </bodyReplace>
+<section class="divider_01">
+    <div class="container">
+        <div class="row">
+            <div id="admin_login_box" class="">
+                <form id="loginForm">
+                <input id="user_name" class="admin_login_input" placeholder="USERNAME" type='text'></input>
+            <br/>
+                <input id="password" class="admin_login_input" placeholder="PASSWORD" type='password'></input>
+                </form>
+        <button id="loginbutton" class='admin_login_button'>LOGIN</button>
+        <button class='admin_forgot_button'>FORGOT PASSWORD</button>
+        <ul id="AJAXMessages"></ul>
+            </div>
+        </div>
+    </div>
+</section>
+
 
     <footerReplace metal:use-macro="./templates/footer.xhtml/footer_bar">
     </footerReplace>  
@@ -25,7 +40,7 @@
             $("#loginbutton").click(doLogin);
 
             // logout event
-            $("#logoutbutton").click(doLogout);
+            //$("#logoutbutton").click(doLogout);
          
             function ConvertFormToJSON(form){
                 var array = $(form).serializeArray();
@@ -41,11 +56,11 @@
             function doLogin() {
 
                 var formData = ConvertFormToJSON("#loginForm");
-                //console.log("Login data to send: ", formData);
+                console.log("Login data to send: ", formData);
 
 
                 $.ajax({
-                    url: "./login.php",
+                    url: "login.php",
                     type: "POST",
                     dataType: "JSON",
                     data: formData,
