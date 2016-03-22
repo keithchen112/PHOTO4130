@@ -35,12 +35,12 @@ class DBConnector {
     public static function getInstance($dbDetails = null) {
 
         if($dbDetails == null) {
-
+			//keith's home computer localhost:8889 root root
             $dbDetails = array(
-                'db_name' => 'PHOTO4130',
-                'db_host' => 'localhost',
+                'db_name' => 'photo4130',
+                'db_host' => 'localhost:8889',
                 'db_user' => 'root',
-                'db_pass' => ''
+                'db_pass' => 'root'
             );
 
         }

@@ -19,13 +19,6 @@
         </div>
 
         <div class="row">
-            <div class="menu_simple">
-                <ul>
-                    <li><a href="" id="">SERVICES</a></li>
-                    <li><a class="rentals_active" href="" id="">RENTALS</a></li>
-                </ul>
-                <br/>
-            </div>
             <table id="products">
                 <thead>
                     <tr>
@@ -54,20 +47,9 @@
                     
                </tfoot>
             </table>
-          
-            <div class="row">
-                <div class="twelve columns">
-                    <h2>ADMIN PROFILE</h2>
-                </div>
-            </div>
-          
-            <div class="row">
-                <div class="menu_simple">
-                    <div class="six columns">
-                    </div>
+          <br/>
+          <br/>
 
-                </div>
-            </div>
           
         </div>
 
@@ -81,7 +63,7 @@
 
       <script>
       $(document).ready(function() {
-          
+          $("#admin_but").css({ "background-color": "#CC675B", "color": "#ffffff" });
             function adminloadProducts() {
                 $.ajax({
                     url: "admin_products.php",
@@ -232,6 +214,7 @@
 
             });
           
+
     });
       </script> 
       

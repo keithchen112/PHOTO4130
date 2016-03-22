@@ -13,16 +13,32 @@
 <section class="divider_01">
     <div class="container">
         <div class="row">
-            <div id="admin_login_box" class="">
+			
+            <div id="admin_login_box" class="" tal:condition="php: !Session::get('isLoggedIn')">
                 <form id="loginForm">
-                <input id="user_name" class="admin_login_input" placeholder="USERNAME" type='text'></input>
+                <input id="user_name" class="admin_login_input" placeholder="USERNAME" type='text' name="username"></input>
             <br/>
-                <input id="password" class="admin_login_input" placeholder="PASSWORD" type='password'></input>
+                <input id="password" class="admin_login_input" placeholder="PASSWORD" type='password' name="password"></input>
                 </form>
         <button id="loginbutton" class='admin_login_button'>LOGIN</button>
-        <button class='admin_forgot_button'>FORGOT PASSWORD</button>
         <ul id="AJAXMessages"></ul>
             </div>
+	
+	
+      <div id="profileContainer">
+        <div id="userProfile" tal:condition="exists:profile">
+          <h2>ADMIN PROFILE</h2>
+          Username:<span tal:content="profile/username"></span><br/>
+          Firstname:<span tal:content="profile/firstname"></span><br/>
+          Lastname: <span tal:content="profile/lastname"></span>
+          <br/><br/>
+			<button id='dashboard_but' class='admin_login_button'>EDIT PRODUCTS</button><br/>
+			<button id='logoutbutton' class='admin_forgot_button'>LOGOUT</button><br/><br/>
+        </div>
+		  
+		  
+      </div>
+	
         </div>
     </div>
 </section>
@@ -37,11 +53,19 @@
      $(document).ready(function() {
           /*<![CDATA[*/
             // login event
+		 	$("#admin_but").css({ "background-color": "#CC675B", "color": "#ffffff" });
+
             $("#loginbutton").click(doLogin);
 
             // logout event
-            //$("#logoutbutton").click(doLogout);
+            $("#logoutbutton").click(doLogout);
          
+		 	$("#dashboard_but").click(function() {
+				
+				 window.location.href = "admin_dashboard.php";
+				
+			});
+		 
             function ConvertFormToJSON(form){
                 var array = $(form).serializeArray();
                 var json = {};
@@ -71,7 +95,7 @@
                         if(status == 'error') {
                             msgs = returnedData['msg'];
                             for(msg in msgs) {
-                                //console.log(msgs[msg]['text']);
+                                console.log(msgs[msg]['text']);
 
                                 $("#AJAXMessages").html("<li class='" + msgs[msg]['type']
                                     + "'" + ">" + msgs[msg]['text'] + "</li>");
@@ -84,23 +108,29 @@
 
                         } else {
                             // you're in, show profile
-                            /*
+                            $("#admin_login_box").remove();
                             console.log(returnedData['user']);
                             $("#profileContainer").html("<div id='userProfile'>"
-                                + "<h2>User Profile</h2>\n"
-                                + "<span>" + returnedData['user']['user_name'] + "</span> "
-                                + "<span>" + returnedData['user']['first_name'] + "</span> "
-                                + "<span>" + returnedData['user']['last_name'] + "</span>"
-                                +"<br/><br/><br/></div>");
+                                + "<h2>ADMIN PROFILE</h2>\n"
+                                + "<span>" + "Username:" + returnedData['user']['username'] + "</span> "  + "<br/>"
+                                + "<span>" + "First Name:" + returnedData['user']['firstname'] + "</span> " + "<br/>"
+                                + "<span>" + "Last Name:" + returnedData['user']['lastname'] + "</span>" + "<br/><br/>"
+								
+                                +"<button id='dashboard_but' class='admin_login_button'>EDIT PRODUCTS</button<br/> "
+								+"<button id='logoutbutton' class='admin_forgot_button'>LOGOUT</button><br/><br/></div>");
                             $("#AJAXMessages").html("");
 
-                            // remove login form
-                            $("#loginForm").remove();
+ 							 $("#dashboard_but").click(function(){
+								 
+								 window.location.href = "admin_dashboard.php";
+								 
+							 });
+                            //$("#loginForm").remove();
 
                             // create logout form
-                            $("#loginFormContainer").after('<div id="logoutFormContainer"><form id="logoutForm"><fieldset><legend>Logout Form</legend><label for="password">Password: </label><input id="logoutbutton" type="button" value="Logout"/><input type="hidden" value="logout" name="logoutButton"/></fieldset></form></div>');
+                           
                             $("#logoutbutton").bind("click", doLogout);
-*/
+
                         }
 
 
@@ -111,7 +141,26 @@
                 });
             }
          
+		 	function doLogout() {
+                var formData = {logout: "true"};
+                //console.log("Logout data to send: ", formData);
 
+                $.ajax({
+                    url: "logout.php",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: formData,
+                    success: function(returnedData) {
+                        //console.log("Logout data returned: ", returnedData);
+                        window.location.href = "admin_dashboard.php";
+
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        //console.log(jqXHR.statusText, textStatus, errorThrown);
+                        console.log(jqXHR.statusText, textStatus);
+                    }
+                });
+            }
          
          /*]]>*/
      });

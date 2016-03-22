@@ -9,6 +9,8 @@ $scripts = array('connection.php',
                  'utils.php',
                  'cartManager.php',
                  'admin_login_action.php',
+				 'admin_login_profile.php',
+				 'admin_logout_action.php',
                  'session.php',
                  'user_manager.php'
                  );
