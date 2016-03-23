@@ -74,12 +74,17 @@
                     success: function(returnedData) {
                         //console.log("cart checkout response: ", returnedData);
                         $("#productlist").html(returnedData);
-
+	
+						 
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         console.log(jqXHR.statusText, textStatus);
                     }
+					
+					
                 });
+				
+				
             }
 
             listRentalProducts();
@@ -102,10 +107,11 @@
 
                 // ALTERED FOR WEB STORAGE
                 var aDate = new Date();
+				/*
                 var item = "<li data-item-sku='" + sku + "' data-item-qty='" + qty + "' data-item-date='"
                     + aDate.getTime() + "'>" + title + " " + qty + " x $" + price + " = " + subtotal
                     + " <input type='button' data-remove-button='remove' value='X'/></li>";
-                shoppingCartList.append(item);
+                shoppingCartList.append(item);*/
 
                 
                // SESSION STORAGE - SAVE SKU AND QTY AS AN OBJECT IN THE
@@ -142,10 +148,11 @@
                     var title = item['title'];
                     var subtotal = parseFloat(Math.round((qty * price) * 100) / 100).toFixed(2);
 
+					/*
                     var item = "<li data-item-sku='" + sku + "' data-item-qty='" + qty + "' data-item-date='"
                         + date + "'>" + title + " " + qty + " x $" + price + " = " + subtotal
                         + " <input type='button' data-remove-button='remove' value='X'/></li>";
-                    shoppingCartList.append(item);
+                    shoppingCartList.append(item);*/
 
 
                 }
@@ -153,6 +160,7 @@
             }
             loadShoppingCartItems();
         
+
     });
           //]]>
     </script>

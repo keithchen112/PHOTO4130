@@ -6,7 +6,7 @@
     $template = new PHPTAL('shopping_cart.xhtml');
 
     // now add the variables for processing and that you created from above:
-    $template->main_page = "SHOPPING CART";
+    $template->main_page = "PHOTO4130 CART";
 
     // execute the template
     try {

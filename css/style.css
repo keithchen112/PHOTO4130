@@ -16,6 +16,16 @@ br { clear:right }
     border-width: 0px 0px 0px 0px;
     border-style: solid;
     border-color: #2f2f2f;
+	position: fixed;
+	top:0;
+}
+
+.bar_simple {
+    width: 100%;
+    background-color: #f3e8d9;
+    border-width: 0px 0px 0px 0px;
+    border-style: solid;
+    border-color: #2f2f2f;
 }
 
 h2 {
@@ -90,7 +100,7 @@ a {
     background-color: #78C0A8;
     display: inline-block;
     height: 38px;
-    padding: 0 30px;
+    padding: 0;
     color: #2f2f2f;
     text-align: center;
 
@@ -112,7 +122,7 @@ a {
     background-color: #ff817b;
     display: inline-block;
     height: 38px;
-    padding: 0 30px;
+    padding: 0;
     color: #2f2f2f;
     text-align: center;
     text-transform: uppercase;

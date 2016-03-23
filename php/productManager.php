@@ -8,12 +8,16 @@ class ProductManager {
         $this->db = DBConnector::getInstance();
     }
 
-    public function listProducts() {
-        $sql = "SELECT SKU, title, item_price, description, qty FROM product";
+    public function listRentalsProducts() {
+        $sql = "SELECT SKU, title, item_price, description, qty FROM product WHERE type='rental'";
         $rows = $this->db->query($sql);
         return $rows;
     }
-
+	public function listServicesProducts() {
+        $sql = "SELECT SKU, title, item_price, description, qty FROM product WHERE type='service'";
+        $rows = $this->db->query($sql);
+        return $rows;
+    }
     public function listAdminProducts() {
         $sql = "SELECT SKU, title, item_price, description, qty FROM product";
         $rows = $this->db->query($sql);

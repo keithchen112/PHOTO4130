@@ -18,13 +18,13 @@
                 <h2>SHOPPING CART</h2>
             </div>
             <div class="two columns">
-                <button id="startCart" class="add_button">START CART</button>
+                
             </div>
         </div>
         
         <div class="row">
 
-            <table class="menu_simple">
+            <table id="shoppingCart_table" class="bar_simple">
                 <thead>
                 <tr>
                     <th style="width: 10%"></th>
@@ -43,33 +43,17 @@
         </div>
       
       
-      <div class="row">
-          <table class="menu_simple">
-            <tr>
-                <th style="width: 10%"></th>
-                <th style="width: 15%"></th>
-                <th style="width: 50%"></th> 
-                <th style="width: 20%"></th>
-                <th style="width: 10%">Total</th> 
-            </tr>
-            <td class="total_td"></td>
-            <td class="total_td"></td>
-            <td class="total_td"></td>
-            <td class="total_td"></td>
-              
-            <!-- TOTAL MUST BE CHANGED DYANMICALLY-->
-            <td id='total' class="total_td"></td>
-          </table>
-      </div> 
+
 
         
                 <div class="row">
                     <div class="two columns">
-                        <button id="cancelCart" class="remove_button">CANCEL</button>
+						<button id="startCart" class="add_button">START</button>
+                        <button id="cancelCart" class="remove_button" style="display: none">CANCEL</button>
                     </div>
                     
                     <div class="two columns">
-                        <button class="add_button">UPDATE</button>
+                        <button id="checkoutCart" class="add_button">CHECKOUT</button>
                     </div>
                 </div>
         
@@ -99,6 +83,8 @@
          
             $("#startCart").click(function() {
                 console.log("Start cart.");
+				$("#startCart").css("display","none");
+				document.getElementById("cancelCart").style.display = "inline-block";
                 $.ajax({
                     url: "./shopping_cart.php",
                     type: "POST",
@@ -110,7 +96,7 @@
                         // WEB STORAGE - SESSION STORAGE
                         //var sessionID = returnedData['s_id'];
                         sessionStorage.setObject('autosave', {items: []});
-                        $("#startCart").css("display","none");
+                        
 
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
@@ -121,6 +107,9 @@
       
             $("#cancelCart").click(function() {
                 console.log("End cart.");
+				
+				document.getElementById("cancelCart").style.display = "none";
+				$("#startCart").css("display","block");
                 $.ajax({
                     url: "./shopping_cart.php",
                     type: "POST",
@@ -145,7 +134,7 @@
             function loadShoppingCartItems() {
 
                 var cartData = sessionStorage.getObject('autosave');
-
+				
                 // if nothing added leave function
                 if(cartData == null) {
                     return;
@@ -155,7 +144,7 @@
                 var cartDataItems = cartData['items'];
                 var shoppingCartList = $("#shoppingCart");
 
-
+				document.getElementById("cancelCart").style.display = "inline-block";
                 for(var i = 0; i < cartDataItems.length; i++) {
                     var item = cartDataItems[i];
                     // sku, qty, date
@@ -165,26 +154,19 @@
                     var price = item['price'];
                     var title = item['title'];
                     var subtotal = parseFloat(Math.round((qty * price) * 100) / 100).toFixed(2);
-                    var grandTotal = parseFloat(Math.round((qty * subtotal) * 100) / 100).toFixed(2);
+					
+
                     
 
                     var item = "<tr data-item-sku='" + sku + "' data-item-qty='" + qty + "' data-item-date='"
                         + date + "'>" + title + " " + qty + " x $" + price + " = " + subtotal
-                        + "<td><input class='' type='button' data-remove-button='remove' value='X'/></td><td>" + sku + "</td><td>" + title + "</td><td>" + qty + "</td><td>" + '$'+ subtotal + "</td></tr>";
+                        + "<td><input class='' type='button' data-remove-button='remove' value='X'/></td><td>" + sku + "</td><td>" + title + "</td><td>" + qty + "</td><td id='subtotal'>" + '$'+ subtotal + "</td></tr>";
                     shoppingCartList.append(item);
                     
-                    //grandTotal.innerHTML += subtotal;
-                    
-                    
-                        //$('#total').val.innerHTML += subtotal;
-                    
                 }
                 
-                for(var i = 0; i < cartDataItems.length; i++) {
-                   //console.log(cartdataItems[i]['grandTotal']);
-                    
-                }
-                
+             
+
                 console.log('cart items array, added', cartDataItems);
             }
             loadShoppingCartItems();
@@ -221,6 +203,43 @@
 
             });
               
+			  
+			             // cancel the cart
+            $("#checkoutCart").click(function() {
+
+                // retrieve all of the items from the cart:
+                var items = $("#shoppingCart tr");
+                var itemArray = [];
+                $.each(items, function(key, value) {
+
+                    var item = {sku: value.getAttribute("data-item-sku"),
+                        qty: value.getAttribute("data-item-qty")};
+                    itemArray.push(item);
+                });
+                var itemsAsJSON = JSON.stringify(itemArray);
+                console.log("itemsAsJSON", itemsAsJSON);
+
+
+                console.log("Check out cart with the following items", itemArray);
+                $.ajax({
+                    url: "./shopping_cart.php",
+                    type: "POST",
+                    dataType: 'json',
+                    data: {action: "checkoutcart", items: itemsAsJSON},
+                    success: function(returnedData) {
+                        console.log("cart check out response: ", returnedData);
+						sessionStorage.clear();
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log(jqXHR.statusText, textStatus);
+                    }
+                });
+				
+				document.getElementById("cancelCart").style.display = "none";
+				$("#startCart").css("display","inline-block");
+				alert("Cart Checked out!");
+                var shoppingCartList = $("#shoppingCart").html("");
+            }); 
        });
           /*]]>*/
       </script>

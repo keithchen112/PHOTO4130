@@ -59,7 +59,7 @@ require_once('php/init.php');
                     $data = array("status" => "fail", "msg" => "Cart NOT cancelled.");
                 }
 
-                break;/*
+                break;
             case "checkoutcart":
                 // check out the cart
 
@@ -71,9 +71,9 @@ require_once('php/init.php');
 
                 // turn the JSON into an array of arrays (true means arrays and not objects)
                 $items = json_decode($_POST['items'], true);
-                $scm->addItemsToCart($items, $_SESSION['id']);
+                $cm->addItemsToCart($items, $_SESSION['id']);
 
-                $affectedRows = $scm->checkoutCart($_SESSION['id']);
+                $affectedRows = $cm->checkoutCart($_SESSION['id']);
 
                 if($affectedRows > 0) {
 
@@ -84,7 +84,7 @@ require_once('php/init.php');
                 } else {
                     $data = array("status" => "fail", "msg" => "Cart was NOT checked out.");
                 }
-                break;*/
+                break;
 
 
         }

@@ -6,7 +6,7 @@ require_once('php/init.php');
 
         if(Utils::isGET()) {
             $pm = new ProductManager();
-            $rows = $pm->listRentalsProducts();
+            $rows = $pm->listServicesProducts();
 
             $html = "";
             foreach($rows as $row) {

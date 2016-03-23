@@ -17,7 +17,7 @@
     $template = new PHPTAL('admin_dashboard.xhtml');
 
     // now add the variables for processing and that you created from above:
-    $template->main_page = "ADMIN DASHBOARD";
+    $template->main_page = "PHOTO4130 ADMIN";
 
 
     // execute the template

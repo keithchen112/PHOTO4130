@@ -38,7 +38,7 @@ loadScripts();
         $template = new PHPTAL('admin_login.xhtml');
 
         // now add the variables for processing and that you created from above:
-        $template->main_page = "ADMIN LOGIN";
+        $template->main_page = "PHOTO4130 ADMIN";
         $template->profile = $profile;
 
         // messages last

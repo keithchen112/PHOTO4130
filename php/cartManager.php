@@ -20,7 +20,7 @@ class cartManager {
         $count = $this->db->affectRows($sql);
         return $count;
     }
-/*
+
     public function checkoutCart($id) {
         $sql = "UPDATE cart SET state = 'checked out' WHERE ID = $id";
         $count = $this->db->affectRows($sql);
@@ -42,7 +42,7 @@ class cartManager {
             $this->db->affectRows($sql);
         }
 
-    }*/
+    }
     
 }
 
