@@ -36,11 +36,12 @@ class DBConnector {
 
         if($dbDetails == null) {
 			//keith's home computer localhost:8889 root root
+            //jonathan's home computer localhost:8888 root 
             $dbDetails = array(
                 'db_name' => 'photo4130',
-                'db_host' => 'localhost:8889',
+                'db_host' => 'localhost:8888',
                 'db_user' => 'root',
-                'db_pass' => 'root'
+                'db_pass' => ''
             );
 
         }
